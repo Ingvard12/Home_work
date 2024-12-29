@@ -1,6 +1,10 @@
+from typing_extensions import Union
+
 from src.mask import get_mask_card_number
 from src.mask import get_mask_account
-def mask_account_card(account_card: str) -> str:
+
+
+def mask_account_card(account_card: Union[int, str]) -> str:
     account_text = ""
     account_nums = ""
 
@@ -17,10 +21,8 @@ def mask_account_card(account_card: str) -> str:
     return account_text + account_nums
 
 
-
-
-
-
+def get_date(date: str):
+    pass
 
 
 if __name__ == "__main__":
@@ -31,5 +33,3 @@ if __name__ == "__main__":
     print(mask_account_card("Visa Classic 6831982476737658"))
     print(mask_account_card("Visa Gold 5999414228426353"))
     print(mask_account_card("MasterCard 7158300734726758"))
-
-
