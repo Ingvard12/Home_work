@@ -1,0 +1,35 @@
+from src.mask import get_mask_card_number
+from src.mask import get_mask_account
+def mask_account_card(account_card: str) -> str:
+    account_text = ""
+    account_nums = ""
+
+    account_list = account_card.split(" ")
+    for element in account_list:
+        if element.isdigit():
+            if len(str(element)) == 16:
+                account_nums = str(get_mask_card_number(element))
+            else:
+                account_nums = str(get_mask_account(element))
+        else:
+            account_text += element
+            account_text += " "
+    return account_text + account_nums
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    print(mask_account_card("Visa Platinum 7000792289606361"))
+    print(mask_account_card("Maestro 1596837868705199"))
+    print(mask_account_card("Счет 73654108430135874305"))
+    print(mask_account_card("Счет 64686473678894779589"))
+    print(mask_account_card("Visa Classic 6831982476737658"))
+    print(mask_account_card("Visa Gold 5999414228426353"))
+    print(mask_account_card("MasterCard 7158300734726758"))
+
+
