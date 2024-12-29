@@ -1,8 +1,8 @@
-from src.mask import get_mask_card_number
-from src.mask import get_mask_account
+from src.mask import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(account_card: str) -> str:
+    """Принимает тип и номер карты или счета и создает их маску"""
     account_text = ""
     account_nums = ""
 
@@ -20,7 +20,8 @@ def mask_account_card(account_card: str) -> str:
 
 
 def get_date(date: str) -> str:
-    pass
+    """Принимает дату и выводит в формате ДД.ММ.ГГГГ"""
+    return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
 
 
 if __name__ == "__main__":
