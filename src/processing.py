@@ -2,7 +2,7 @@ from typing import Any, Dict, List
 
 
 def filter_by_state(list_dict: List[Dict[str, Any]], key_value: str = "EXECUTED") -> List[Dict[str, Any]]:
-    """Фильтрует список словарей и возвращает только те в которых значечение ключа 'state'
+    """Фильтрует список словарей операций и возвращает только те в которых значечение ключа 'state'
     соответствует указанному в функции, по умолчанию 'EXECUTED'"""
     new_list = []
     for operation in list_dict:
@@ -12,7 +12,7 @@ def filter_by_state(list_dict: List[Dict[str, Any]], key_value: str = "EXECUTED"
 
 
 def sort_by_date(list_dict: List[Dict[str, Any]], sort_by: bool = True) -> List[Dict[str, Any]]:
-    """Сортирует списки словарей по дате, по умолчанию от последней даты до первой"""
+    """Сортирует списки словарей операций по дате, по умолчанию от последней даты до первой"""
     return sorted(list_dict, key=lambda x: x["date"], reverse=sort_by)
 
 
