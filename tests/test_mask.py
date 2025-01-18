@@ -31,5 +31,9 @@ def test_get_mask_account_other_length(account, expected):
     assert get_mask_account(account) == expected
 
 
+def test_get_mask_account_empty():
+    assert get_mask_account('') == "Номер счета не может быть пустым"
+
+
 
 
