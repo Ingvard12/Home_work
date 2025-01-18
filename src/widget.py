@@ -31,7 +31,15 @@ def mask_account_card(account_card: str) -> str:
 
 def get_date(date: str) -> str:
     """Принимает дату и выводит в формате ДД.ММ.ГГГГ"""
-    return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
+    split_date = date.split("T")
+    if "-" in date:
+        for element in split_date:
+            if "-" in element:
+                new_date = element.split("-")
+                return f"{new_date[-1]}.{new_date[-2]}.{new_date[-3]}"
+    else:
+        return "Отсутствует дата или некорректная запись даты"
+    return ""
 
 
 # if __name__ == "__main__":
@@ -43,4 +51,4 @@ def get_date(date: str) -> str:
 #     print(mask_account_card("Visa Gold 5999414228426353"))
 #     print(mask_account_card("MasterCard 7158300734726758"))
 #
-#     print(get_date("2024-03-11T02:26:18.671407"))
+# print(get_date("2024-03-11T02:26:18.671407"))
