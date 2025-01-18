@@ -15,7 +15,7 @@ def test_get_mask_card_number_other_length(card_number, expected):
 
 
 def test_get_mask_card_number_empty():
-    assert get_mask_card_number('') == "Ошибка! Номер карты не может быть пустым"
+    assert get_mask_card_number('') == "Номер карты не может быть пустым"
 
 
 def test_get_mask_account():
