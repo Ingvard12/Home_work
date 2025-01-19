@@ -32,14 +32,14 @@ def mask_account_card(account_card: str) -> str:
 def get_date(date: str) -> str:
     """Принимает дату и выводит в формате ДД.ММ.ГГГГ"""
     split_date = date.split("T")
+    new_date = []
     if "-" in date:
         for element in split_date:
             if "-" in element:
                 new_date = element.split("-")
-                return f"{new_date[-1]}.{new_date[-2]}.{new_date[-3]}"
     else:
         return "Отсутствует дата или некорректная запись даты"
-    return ""
+    return f"{new_date[-1]}.{new_date[-2]}.{new_date[-3]}"
 
 
 # if __name__ == "__main__":
