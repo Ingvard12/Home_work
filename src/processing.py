@@ -17,7 +17,7 @@ def sort_by_date(list_dict: List[Dict[str, Any]], sort_by: bool = False) -> Any:
     for i in list_dict:
         date_format = i["date"]
         try:
-            datetime.strptime(date_format,"%Y-%m-%dT%H:%M:%S.%f")
+            datetime.strptime(date_format, "%Y-%m-%dT%H:%M:%S.%f")
         except ValueError:
             date_format = 'Не верный формат даты'
         else:
