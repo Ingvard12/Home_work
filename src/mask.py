@@ -3,14 +3,18 @@ from typing_extensions import Union
 
 def get_mask_card_number(card_number: Union[int, str]) -> str:
     """Создает маску из введенного номера карты"""
+    if len(str(card_number)) == 0:
+        return "Номер карты не может быть пустым"
     return f"{str(card_number)[0:4]} {str(card_number)[4:6]}** **** {str(card_number)[-4:]}"
 
 
 def get_mask_account(account: Union[int, str]) -> str:
     """Создает маску номера счета"""
+    if len(str(account)) == 0:
+        return "Номер счета не может быть пустым"
     return f"**{str(account)[-4:]}"
 
 
-if __name__ == "__main__":
-    print(get_mask_card_number(7000792289606361))
-    print(get_mask_account(73654108430135874305))
+# if __name__ == "__main__":
+#     print(get_mask_card_number(7000792289606361))
+#     print(get_mask_account(73654108430135874305))
