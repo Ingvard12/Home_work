@@ -1,8 +1,8 @@
-import pytest
-
 from typing import Any, Dict, List
 
-from src.generators import filter_by_currency
+import pytest
+
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
 @pytest.fixture
@@ -91,3 +91,54 @@ def test_filter_by_currency_empty(transactions_list: List[Dict[str, Any]]) -> No
     filtered_transactions = list(filter_by_currency([], "RUB"))
     expected_result = ["Совпадений не найдено"]
     assert filtered_transactions == expected_result
+
+
+def test_transaction_descriptions(transactions_list: List[Dict[str, Any]]) -> None:
+    filtered_transactions = list(transaction_descriptions(transactions_list))
+    expected_result = [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод со счета на счет",
+        "Перевод с карты на карту",
+        "Перевод организации",
+    ]
+    assert filtered_transactions == expected_result
+
+
+def test_transaction_descriptions_empty(transactions_list: List[Dict[str, Any]]) -> None:
+    filtered_transactions = list(transaction_descriptions([]))
+    assert filtered_transactions == []
+
+
+def test_card_number_generator() -> None:
+    card_gen = list(card_number_generator(1, 5))
+    expected_result = [
+        "0000 0000 0000 0001",
+        "0000 0000 0000 0002",
+        "0000 0000 0000 0003",
+        "0000 0000 0000 0004",
+        "0000 0000 0000 0005",
+    ]
+    assert card_gen == expected_result
+
+
+def test_card_number_format() -> None:
+    card_gen = list(card_number_generator(1, 5))
+    for card_num in card_gen:
+        assert len(card_num) == 19
+        assert len(card_num.split()) == 4
+
+
+def test_card_number_edge_cases() -> None:
+    card_gen = list(card_number_generator(10, 10))
+    assert len(card_gen) == 1
+    card_gen = list(card_number_generator(10, 5))
+    expected_result = [
+        "0000 0000 0000 0005",
+        "0000 0000 0000 0006",
+        "0000 0000 0000 0007",
+        "0000 0000 0000 0008",
+        "0000 0000 0000 0009",
+        "0000 0000 0000 0010",
+    ]
+    assert card_gen == expected_result

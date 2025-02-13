@@ -1,8 +1,8 @@
 # import random
-from typing import Any, Dict, Iterator, List
+from typing import Any, Dict, Iterator, List, Union
 
 
-def filter_by_currency(transactions: List[Dict[str, Any]], currency: str = "RUB") -> Iterator[Dict[str, Any]]:
+def filter_by_currency(transactions: List[Dict[str, Any]], currency: str = "RUB") -> Iterator[Union[Dict[str, Any], str]]:
     """Фильтрует транзакции по указанной валюте и возвращает их в виде итератора."""
     found = False
     for t in transactions:
@@ -20,13 +20,17 @@ def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str
         yield tr["description"]
 
 
-def card_number_generator(start: int = 1, stop: int = 4) -> Iterator[str]:
+def card_number_generator(start: int = 1, stop: int = 5) -> Iterator[str]:
     """Генерирует номера карт в формате "XXXX XXXX XXXX XXXX" в заданном диапазоне"""
+    if start > stop:
+        start, stop = stop, start
+        print("Первое число не может быть меньше второго, генерация начнется с меньшего числа")
     gen_card_numbers = set()
     # while True:
     #     card_gen = str(random.randint(start, stop)) # Заготовка для случайного генератора
     gen_iter = start
-    for _ in range(start, stop + 1):
+
+    for _ in range(stop - start + 1):
         card_gen = str(gen_iter)
         gen_iter += 1
         while len(card_gen) < 16:
@@ -96,18 +100,18 @@ def card_number_generator(start: int = 1, stop: int = 4) -> Iterator[str]:
 #         except StopIteration:
 #             break
 #
-#     descriptions = transaction_descriptions(transactions)
-#     for _ in range(5):
-#         try:
-#             print(next(descriptions))
+    # descriptions = transaction_descriptions(transactions)
+    # for _ in range(5):
+    #     try:
+    #         print(next(descriptions))
+    #
+    #     except StopIteration:
+    #         break
 #
-#         except StopIteration:
-#             break
-#
-#     gen = card_number_generator()
-#     for _ in range(10):
-#         try:
-#             print(next(gen))
-#
-#         except StopIteration:
-#             break
+    # gen = card_number_generator()
+    # for _ in range(10):
+    #     try:
+    #         print(next(gen))
+    #
+    #     except StopIteration:
+    #         break
