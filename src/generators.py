@@ -15,7 +15,7 @@ def filter_by_currency(transactions: List[Dict[str, Any]], currency: str = "RUB"
 
 
 def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str]:
-    """Возвращает итератор по описаниям транзакций."""
+    """Возвращает итератор с описаниями транзакций."""
     for tr in transactions:
         yield tr["description"]
 
