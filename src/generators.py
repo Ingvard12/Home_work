@@ -25,21 +25,18 @@ def card_number_generator(start: int = 1, stop: int = 5) -> Iterator[str]:
     if start > stop:
         start, stop = stop, start
         print("Первое число не может быть меньше второго, генерация начнется с меньшего числа")
-    gen_card_numbers = set()
+    # gen_card_numbers = set()
     # while True:
     #     card_gen = str(random.randint(start, stop)) # Заготовка для случайного генератора
     gen_iter = start
 
-    for _ in range(stop - start + 1):
-        card_gen = str(gen_iter)
-        gen_iter += 1
-        while len(card_gen) < 16:
-            card_gen = "0" + card_gen
+    for num in range(start, stop + 1):
+        card_gen = str(num).zfill(16)     
         card_number = f"{card_gen[:4]} {card_gen[4:8]} {card_gen[8:12]} {card_gen[12:16]}"
 
-        if card_number not in gen_card_numbers:
-            gen_card_numbers.add(card_number)
-            yield card_number
+    #    if card_number not in gen_card_numbers:
+    #        gen_card_numbers.add(card_number)
+        yield card_number
 
 
 # if __name__ == "__main__":
